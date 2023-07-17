@@ -11,8 +11,7 @@ import org.launchcode.techjobs.oo.CoreCompetency;
 
 
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by LaunchCode
@@ -60,8 +59,58 @@ public class JobTest {
                 new Location("Desert"), new PositionType("Quality control"),
                 new CoreCompetency("Persistence"));
 
-        assertNotEquals(jobA, jobB);
+        assertFalse(jobA.equals(jobB));
 
     }
 
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+
+        Job jobC =  new Job("Product tester", new Employer("ACME"),
+                new Location("Desert"), new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
+
+        String output = jobC.toString();
+
+        assertEquals('\n', output.charAt(0));
+        assertEquals('\n', output.charAt(output.length()-1));
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+
+        Job jobD =  new Job("Product tester", new Employer("ACME"),
+                new Location("Desert"), new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
+
+        assertEquals("\n" + "ID: " + jobD.getId() + "\n" +
+                "Name: " + jobD.getName() + "\n" +
+                "Employer: " + jobD.getEmployer() + "\n" +
+                "Location: " + jobD.getLocation() + "\n" +
+                "Position Type: " + jobD.getPositionType() + "\n" +
+                 "Core Competency: " + jobD.getCoreCompetency() + "\n", jobD.toString());
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+
+        Job jobE =  new Job("", new Employer("ACME"),
+                new Location(""), new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
+
+
+
+        assertEquals("\n" + "ID: " + jobE.getId() + "\n" +
+                "Name: " + "Data not available" + "\n" +
+                "Employer: " + jobE.getEmployer() + "\n" +
+                "Location: " + "Data not available" + "\n" +
+                "Position Type: " + jobE.getPositionType() + "\n" +
+                "Core Competency: " + jobE.getCoreCompetency() + "\n", jobE.toString());
+
+    }
+
+
+
+    // This is not passing the autograder test-- calls assertion in Test 5.
+    // Something is wrong with the format of all assertEquals assertions
 }

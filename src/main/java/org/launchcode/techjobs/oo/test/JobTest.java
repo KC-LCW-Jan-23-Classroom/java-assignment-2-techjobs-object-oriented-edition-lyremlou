@@ -10,7 +10,7 @@ import org.launchcode.techjobs.oo.PositionType;
 import org.launchcode.techjobs.oo.CoreCompetency;
 
 
-import static junit.framework.TestCase.assertEquals;
+
 import static org.junit.Assert.*;
 
 /**
